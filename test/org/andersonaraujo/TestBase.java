@@ -11,14 +11,14 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestBase {
 
-    protected Object validateExecutionTime(Supplier function, long expectedMaxExecTime) {
+    protected Object validateExecutionTime(Supplier function, long expectedMaxExecTimeMs) {
         Instant start = Instant.now();
         Object result = function.get();
         Instant end = Instant.now();
         long executionTime = Duration.between(start, end).toMillis();
         assertTrue(String.format(
                 "Execution time %d' is greater than max '%d'.", executionTime,
-                expectedMaxExecTime), executionTime < expectedMaxExecTime);
+                expectedMaxExecTimeMs), executionTime < expectedMaxExecTimeMs);
 
         return result;
     }
