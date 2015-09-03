@@ -18,10 +18,10 @@ public class TapeEquilibriumTest extends TestBase {
 
     @Test
     public void testSolution() {
-        validateSolution(new int[] { 3, 1, 2, 4, 3 }, 1, 1000);
-        validateSolution(new int[] { 3, 1, 2, 4, 3 }, 1, 1000);
-        validateSolution(new int[] { 3, 4, 2, 1, 3 }, 1, 1000);
-        validateSolution(new int[] { 3, 4, 1 }, 2, 1000);
+        validateSolution(new int[]{3, 1, 2, 4, 3}, 1, 1000);
+        validateSolution(new int[]{3, 1, 2, 4, 3}, 1, 1000);
+        validateSolution(new int[]{3, 4, 2, 1, 3}, 1, 1000);
+        validateSolution(new int[]{3, 4, 1}, 2, 1000);
         validateSolution(createArray(Integer.MIN_VALUE, 100000), 552, 1000);
         validateSolution(createArray(Integer.MIN_VALUE, 100000000), 8, 1000);
     }
@@ -29,8 +29,8 @@ public class TapeEquilibriumTest extends TestBase {
     private void validateSolution(int[] values, int expectedResult,
                                   long expectedMaxExecTime) {
 
-        Object result = validateExecutionTime(() -> tp.solution(values), expectedMaxExecTime);
-        assertEquals("Invalid result.", expectedResult, Integer.parseInt(result.toString()));
+        Integer result = validateExecutionTime(() -> tp.solution(values), expectedMaxExecTime, Integer.class);
+        assertEquals("Invalid result.", expectedResult, result.intValue());
 
     }
 

@@ -16,8 +16,8 @@ public class FrogJmpTest extends TestBase {
     @Test
     public void testSolution() {
 
-        Object result = validateExecutionTime(() -> frogJmp.solution(10, 85, 30), 1000);
-        assertEquals("Invalid result.", 3, Integer.parseInt(result.toString()));
+        Integer result = validateExecutionTime(() -> frogJmp.solution(10, 85, 30), 1000, Integer.class);
+        assertEquals("Invalid result.", 3, result.intValue());
 
     }
 
