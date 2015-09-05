@@ -3,6 +3,9 @@ package org.andersonaraujo.timecomplexity;
 import org.andersonaraujo.TestBase;
 import org.junit.Test;
 
+import java.util.Date;
+import java.util.Random;
+
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -10,42 +13,69 @@ import static junit.framework.Assert.assertEquals;
  */
 public class PermMissingElemTest extends TestBase {
 
-    public static final int MAX_EXEC_TIME_MS = 1000;
+    public static final int MAX_EXEC_TIME_MS = 500;
     private PermMissingElem instance = new PermMissingElem();
 
     @Test
-    public void testNominalSolution() {
+    public void testSolution() {
 
+        // Simple unordered test
         Integer result = validateExecutionTime(() -> instance.solution(new int[]{2, 3, 1, 5}), MAX_EXEC_TIME_MS,
                 Integer.class);
         assertEquals("Invalid result.", 4, result.intValue());
 
+        // Another simple unordered test
         result = validateExecutionTime(() -> instance.solution(new int[]{2, 5, 1, 4}), MAX_EXEC_TIME_MS, Integer.class);
         assertEquals("Invalid result.", 3, result.intValue());
 
+        //
         result = validateExecutionTime(() -> instance.solution(new int[]{2, 5, 6, 1, 4, 3, 9, 7, 8, 11}),
                 MAX_EXEC_TIME_MS, Integer.class);
         assertEquals("Invalid result.", 10, result.intValue());
 
-        result = validateExecutionTime(() -> instance.solution(createArray(100, 100000, 2)), MAX_EXEC_TIME_MS,
+        // Testing 100.000 elements, the second is missing
+        result = validateExecutionTime(() -> instance.solution(createArray(1, 100_000, 2)), MAX_EXEC_TIME_MS,
                 Integer.class);
-        assertEquals("Invalid result.", 101, result.intValue());
+        assertEquals("Invalid result.", 2, result.intValue());
 
-        int[] array = createArray(1, 10000000, 1);
-        int valueRemoved = array[1098];
-        array[1098] = 0;
+        // Testing 100.000 elements, no missing
+        result = validateExecutionTime(() -> instance.solution(createArray(1, 100_000, 1)), MAX_EXEC_TIME_MS,
+                Integer.class);
+        assertEquals("Invalid result.", 100_001, result.intValue());
+
+        // Testing 10.000.000 elements, some random is missing
+        int[] array = createArray(1, 10_000_000, 1);
+        int removedIdx = new Random(new Date().getTime()).nextInt(10_000_000);
+        int valueRemoved = array[removedIdx];
+        array[removedIdx] = 10_000_001;
         result = validateExecutionTime(() -> instance.solution(array), MAX_EXEC_TIME_MS, Integer.class);
         assertEquals("Invalid result.", valueRemoved, result.intValue());
-    }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testOffNominalSolutionWhenArgumentIsNull() {
-        instance.solution(null);
-    }
+        // Test null parameter
+        result = validateExecutionTime(() -> instance.solution(null), MAX_EXEC_TIME_MS, Integer.class);
+        assertEquals("Invalid result.", 1, result.intValue());
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testOffNominalSolutionWhenArgumentIsEmptyArray() {
-        instance.solution(new int[0]);
+        // Test empty array
+        result = validateExecutionTime(() -> instance.solution(new int[0]), MAX_EXEC_TIME_MS, Integer.class);
+        assertEquals("Invalid result.", 1, result.intValue());
+
+        // Test single element
+        result = validateExecutionTime(() -> instance.solution(new int[]{1}), MAX_EXEC_TIME_MS, Integer.class);
+        assertEquals("Invalid result.", 2, result.intValue());
+
+        // Test double element
+        result = validateExecutionTime(() -> instance.solution(new int[]{1, 2}), MAX_EXEC_TIME_MS, Integer.class);
+        assertEquals("Invalid result.", 3, result.intValue());
+
+        // No missing (should return next element)
+        result = validateExecutionTime(() -> instance.solution(new int[]{2, 3, 4, 1, 5}), MAX_EXEC_TIME_MS,
+                Integer.class);
+        assertEquals("Invalid result.", 6, result.intValue());
+
+        // Test missing first
+        result = validateExecutionTime(() -> instance.solution(new int[]{3, 2}), MAX_EXEC_TIME_MS, Integer.class);
+        assertEquals("Invalid result.", 1, result.intValue());
+
     }
 
 }
