@@ -3,6 +3,8 @@ package org.andersonaraujo.countingelements;
 import java.util.Arrays;
 
 /**
+ * Result at codility: https://codility.com/demo/results/demoJKDK2H-DAW/
+ * <p>
  * A non-empty zero-indexed array A consisting of N integers is given.
  * <p>
  * A permutation is a sequence containing each element from 1 to N once, and only once.
@@ -66,8 +68,8 @@ public class PermCheck {
         int valueToCompare = 1;
 
         // Iterates over the values, compare and increment valueToCompare
-        for(int i = 0; i < values.length; i++){
-            if(values[i] != valueToCompare){
+        for (int value : values) {
+            if (value != valueToCompare) {
                 // Missing element identified. Return 0 (array is not permutation)
                 return 0;
             }
