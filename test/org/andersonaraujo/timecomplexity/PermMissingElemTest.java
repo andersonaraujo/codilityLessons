@@ -13,7 +13,8 @@ import static junit.framework.Assert.assertEquals;
  */
 public class PermMissingElemTest extends TestBase {
 
-    public static final int MAX_EXEC_TIME_MS = 500;
+    private static final int MAX_EXEC_TIME_MS = 500;
+
     private PermMissingElem instance = new PermMissingElem();
 
     @Test
