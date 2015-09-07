@@ -29,11 +29,7 @@ public class FrogRiverOneTest extends TestBase {
 
         // Single element
         result = validateExecutionTime(() -> instance.solution(1, new int[]{1}), MAX_EXEC_TIME_MS, Integer.class);
-        assertEquals("Invalid result.", -1, result.intValue());
-
-        // Position zero
-        result = validateExecutionTime(() -> instance.solution(0, new int[]{1}), MAX_EXEC_TIME_MS, Integer.class);
-        assertEquals("Invalid result.", -1, result.intValue());
+        assertEquals("Invalid result.", 0, result.intValue());
 
         // Never found
         result = validateExecutionTime(() -> instance.solution(7, new int[]{1, 3, 1, 4, 2, 3, 5, 4}), MAX_EXEC_TIME_MS,

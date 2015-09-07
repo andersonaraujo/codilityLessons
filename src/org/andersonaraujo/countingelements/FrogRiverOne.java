@@ -1,6 +1,8 @@
 package org.andersonaraujo.countingelements;
 
 /**
+ * Result at codility: https://codility.com/demo/results/demoR4XAZ4-2RU/
+ * <p>
  * A small frog wants to get to the other side of a river. The frog is currently located at position 0, and wants to get
  * to position X. Leaves fall from a tree onto the surface of the river.
  * <p>
@@ -72,7 +74,7 @@ public class FrogRiverOne {
         for (int i = 0; i < values.length; ++i) {
             int valueToSearch = values[i];
             // Prevent ArrayIndexOutOfBoundsException
-            if (valueToSearch >= values.length) {
+            if (valueToSearch > values.length) {
                 continue;
             }
             // Mark index seen as true and increment count
